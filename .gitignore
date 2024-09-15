@@ -8,9 +8,13 @@
 
 # Node
 /node_modules
-/server/node_modules
 npm-debug.log
 yarn-error.log
+
+# Server
+/server/node_modules
+/server/.env
+/server/dist
 
 # IDEs and editors
 .idea/

@@ -1,8 +1,17 @@
 import express, { Application, Request, Response } from "express";
+import cors from "cors";
 import languages from "./routes/languages";
 import words from "./routes/words";
 
 const app: Application = express();
+
+// define CORS
+const corsOptions = {
+    optionSuccessStatus: 200,
+    credentials: true,
+    origin: "*",
+};
+app.use(cors(corsOptions));
 
 // middleware
 app.use(express.urlencoded({extended: false}));
