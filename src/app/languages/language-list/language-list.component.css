@@ -1,0 +1,14 @@
+article {
+    margin: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+@media (max-width: 800px) {
+    article {
+        width: 90%;
+    }
+}

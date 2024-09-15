@@ -1,0 +1,19 @@
+section {
+    width: 100%;
+    margin: auto;
+
+    display: flex;
+    justify-content: center;
+}
+
+article {
+    width: 90%;
+    padding: 10px;
+}
+
+@media (max-width: 800px) {
+    section {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+}

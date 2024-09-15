@@ -1,0 +1,16 @@
+input {
+    width: 90%;
+    height: 30px;
+    font-family: "Poppins", system-ui;
+    font-size: large;
+    border: none;
+    border-bottom: 2px dashed var(--purple2);
+
+    transition-property: border;
+    transition-duration: 500ms;
+    transition-timing-function: ease-in-out;
+}
+input:focus {
+    outline: none;
+    border-bottom: 2px solid var(--purple3);
+}

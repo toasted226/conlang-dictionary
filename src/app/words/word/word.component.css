@@ -1,0 +1,49 @@
+section {
+    background-color: white;
+    width: 85%;
+    height: auto;
+    padding: 10px;
+    margin-top: 10px;
+    border: 2px solid var(--purple3);
+}
+
+div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    gap: 10px;
+
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    font-size: large;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+    max-width: 50%;
+}
+
+.ipa {
+    color: #707070;
+    font-size: large;
+}
+
+.example {
+    /* padding: 5px; */
+    margin-top: 10px;
+    /* border: 1px solid #707070;
+    background-color: #f9f9f9;
+    border-radius: 5px; */
+}
+
+@media (max-width: 800px) {
+    p {
+        max-width: 90%;
+    }
+}

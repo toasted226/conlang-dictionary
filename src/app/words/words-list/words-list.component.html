@@ -1,0 +1,4 @@
+<app-searchbar [languageName]="languageName()" />
+@for (word of words(); track word.word_id) {
+    <app-word [word]="word" />
+}

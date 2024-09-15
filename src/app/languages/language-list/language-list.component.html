@@ -1,0 +1,5 @@
+<article>
+    @for(language of languages(); track language.language_id) {
+        <app-language [language]="language" />
+    }
+</article>

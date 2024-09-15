@@ -20,8 +20,8 @@ app.use(express.json());
 app.use("/api/v1/languages", languages);
 app.use("/api/v1/words", words);
 
-app.get("/", (req: Request, res: Response) => {
-    res.send("Typescript server is working!");
+app.get("/", (_: Request, res: Response) => {
+    res.send("Conlang dictionary server is working!");
 });
 
 const port = process.env.PORT || 5000;
