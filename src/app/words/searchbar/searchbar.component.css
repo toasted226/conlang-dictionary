@@ -1,8 +1,13 @@
+div {
+    display: flex;
+    gap: 5px;
+}
+
 input {
-    width: 90%;
-    height: 30px;
+    width: 80%;
     font-family: "Poppins", system-ui;
     font-size: large;
+    background-color: white;
     border: none;
     border-bottom: 2px dashed var(--purple2);
 
@@ -13,4 +18,23 @@ input {
 input:focus {
     outline: none;
     border-bottom: 2px solid var(--purple3);
+}
+
+button {
+    color: var(--beige);
+    background-color: var(--purple3);
+    border: 2px solid var(--purple3);
+    font-family: "Poppins", system-ui;
+    font-size: large;
+    padding-inline: 10px;
+}
+button:hover {
+    color: var(--purple3);
+    background-color: var(--purple2);
+    border: 2px solid var(--purple3);
+}
+button:active {
+    color: var(--purple3);
+    background-color: var(--purple1);
+    border: 2px solid var(--purple3);
 }

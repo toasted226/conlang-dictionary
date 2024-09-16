@@ -12,3 +12,11 @@ export const getWords = async (req: Request, res: Response) => {
         res.status(500).send("Database query failed");
     }
 };
+
+export const searchWords = async (req: Request, res: Response) => {
+    try {
+        
+    } catch (err) {
+
+    }
+}
