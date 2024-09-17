@@ -41,17 +41,30 @@ export class WordsListComponent implements OnInit {
             },
         });
 
-        this.destroyRef.onDestroy(() => paramSub.unsubscribe());
+        const querySub = this.activatedRoute.queryParamMap.subscribe({
+            next: (queryParams) => {
+                const search = queryParams.get("search");
+                if (search) {
+                    this.onLanguageIdUpdate(search);
+                } else {
+                    this.onLanguageIdUpdate();
+                }
+            }
+        });
+
+        this.destroyRef.onDestroy(() => {
+            paramSub.unsubscribe();
+            querySub.unsubscribe();
+        });
     }
 
-    onLanguageIdUpdate() {
+    onLanguageIdUpdate(searchTerm?: string) {
         if (this.languageId() === null) {
             return;
         }
 
-        console.log("Updating words list");
         const subscription = this.wordsService
-            .getWords(this.languageId()!)
+            .getWords(this.languageId()!, searchTerm)
             .subscribe({
                 error: (err) => {
                     // handle error

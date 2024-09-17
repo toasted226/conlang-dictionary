@@ -1,4 +1,12 @@
-<div>
-    <input type="search" [placeholder]="languageName() ? 'Search words in ' + languageName() : ''">
+<form (ngSubmit)="onSubmit()">
+    <input
+        type="search"
+        name="search"
+        id="search"
+        [(ngModel)]="search"
+        [placeholder]="
+            languageName() ? 'Search words in ' + languageName() : ''
+        "
+    />
     <button>Search</button>
-</div>
+</form>

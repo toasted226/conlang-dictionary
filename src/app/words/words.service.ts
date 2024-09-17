@@ -12,9 +12,14 @@ export class WordsService {
 
     private httpClient = inject(HttpClient);
 
-    getWords(languageId: string) {
+    getWords(languageId: string, search?: string) {
+        let searchQuery = "";
+        if (search) {
+            searchQuery = `/?search=${search}`;
+        }
+
         return this.httpClient
-            .get<Word[]>("http://localhost:5000/api/v1/words/" + languageId)
+            .get<Word[]>("http://localhost:5000/api/v1/words/" + languageId + searchQuery)
             .pipe(
 				tap({
 					next: (words) => {
