@@ -21,3 +21,14 @@ export const getLanguage = async (req: Request, res: Response) => {
         res.status(500).send("Database query failed");
     }
 };
+
+export const addLanguage = async (req: Request, res: Response) => {
+    try {
+        const { name } = req.body;
+        await db.query("INSERT INTO languages (name) VALUES ($1)", [name]);
+        res.status(201).json({ success: true });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Database query failed");
+    }
+}

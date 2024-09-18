@@ -9,7 +9,6 @@ const saltRounds = 10;
 
 export const login = async (req: Request, res: Response) => {
     const { username, password } = req.body;
-
     const retrieved = await db.query(
         "SELECT * FROM users WHERE username = $1",
         [username]
