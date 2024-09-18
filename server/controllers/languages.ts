@@ -29,6 +29,29 @@ export const addLanguage = async (req: Request, res: Response) => {
         res.status(201).json({ success: true });
     } catch (err) {
         console.log(err);
-        res.status(500).send("Database query failed");
+        res.status(500).send("Database update failed");
+    }
+}
+
+export const updateLanguage = async (req: Request, res: Response) => {
+    try {
+        const { name } = req.body;
+        const { id } = req.params;
+        await db.query("UPDATE languages SET name = $1 WHERE language_id = $2", [name, id]);
+        res.status(200).json({success: true});
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Database update failed");
+    }
+}
+
+export const deleteLanguage = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        await db.query("DELETE FROM languages WHERE language_id = $1", [id]);
+        res.status(200).json({success: true});
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Database update failed");
     }
 }
