@@ -9,6 +9,6 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
         next();
     } catch (err) {
         res.clearCookie("token");
-        return res.status(403).json({error: "Invalid credentials"});
+        return res.status(403).json({authenticated: false});
     }
 };

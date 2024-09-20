@@ -36,6 +36,10 @@ export const login = async (req: Request, res: Response) => {
     return res.status(403).json({ error: "The password entered is incorrect" });
 };
 
+export const authenticated = (_: Request, res: Response) => {
+    return res.status(200).json({authenticated: true});
+};
+
 const hashPassword = async (plainTextPassword: string) => {
     return await bcrypt.hash(plainTextPassword, saltRounds);
 };
