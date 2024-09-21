@@ -38,3 +38,9 @@ button:active {
     background-color: var(--purple1);
     border: 2px solid var(--purple3);
 }
+
+@media (max-width: 800px) {
+    input {
+        font-size: medium;
+    }
+}

@@ -1,9 +1,11 @@
 header {
+    display: flex;
+    justify-content: space-between;
+
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 50px;
-    text-align: center;
+    height: fit-content;
     background-color: var(--purple1);
 }
 
@@ -11,4 +13,47 @@ h1 {
     margin: 0;
     color: var(--purple3);
     font-size: xx-large;
+    padding-inline: 1em;
+}
+
+a {
+    display: flex;
+    align-items: center;
+
+    font-family: 'Poppins', system-ui;
+    font-size: large;
+    border: none;
+    padding-inline: 1em;
+    text-decoration: none;
+    color: var(--beige);
+    background-color: var(--purple3);
+    border-left: 2px solid var(--purple3);
+}
+a:hover {
+    border-left: 2px solid var(--purple3);
+    color: var(--purple3);
+    background-color: var(--purple2);
+}
+a:active {
+    background-color: var(--purple1);
+}
+
+.selected {
+    color: var(--purple3);
+    background-color: var(--purple2);
+}
+
+@media (max-width: 800px) {
+    header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    h1 {
+        font-size: large;
+    }
+
+    a {
+        font-size: medium;
+    }
 }

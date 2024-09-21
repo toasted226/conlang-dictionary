@@ -1,0 +1,61 @@
+form {
+    width: fit-content;
+    padding: 20px;
+    color: var(--purple3);
+    background-color: var(--purple1);
+    border: 2px solid var(--purple3);
+}
+
+h1 {
+    font-size: x-large;
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+input {
+    display: block;
+    width: 20em;
+    border: 0;
+    height: 2em;
+    font-family: "Poppins", system-ui;
+    font-size: medium;
+}
+
+button {
+    border: none;
+    color: var(--beige);
+    background-color: var(--purple3);
+    font-size: medium;
+    height: 2em;
+    width: 5em;
+}
+button:hover {
+    color: var(--purple3);
+    background-color: var(--purple2);
+    border: 2px solid var(--purple3);
+}
+button:active {
+    background-color: var(--purple1);
+}
+
+@media (max-width: 800px) {
+    form {
+        width: 85%;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    h1 {
+        text-align: center;
+    }
+}
