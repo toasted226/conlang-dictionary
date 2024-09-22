@@ -1,8 +1,23 @@
+div {
+    display: flex;
+    justify-content: space-between;
+    width: 20.35vw;
+}
+
 a {
-    width: 20vw;
+    width: 90%;
+}
+
+.edit {
+    width: 10%;
+    font-size: medium;
 }
 
 @media (max-width: 800px) {
+    div {
+        width: 100%;
+    }
+
     a {
         width: 100%;
     }

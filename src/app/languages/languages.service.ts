@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { inject, Injectable, signal } from "@angular/core";
+import { DestroyRef, inject, Injectable, signal } from "@angular/core";
 import { Language } from "./languages.model";
 import { tap } from "rxjs";
 
@@ -11,6 +11,12 @@ export class LanguagesService {
     allLanguages = this.languages.asReadonly();
 
     private httpClient = inject(HttpClient);
+	private destroyRef = inject(DestroyRef);
+
+	private refreshLanguages() {
+		const subscription = this.getLanguages().subscribe();
+		this.destroyRef.onDestroy(() => subscription.unsubscribe());
+	}
 
     getLanguages() {
         return this.httpClient
@@ -32,16 +38,52 @@ export class LanguagesService {
             .post(
                 "http://localhost:5000/api/v1/languages",
                 { name },
-                {
-                    withCredentials: true,
-                }
+                { withCredentials: true }
             )
             .pipe(
                 tap({
+					next: () => {
+						this.refreshLanguages();
+					},
                     error: (err) => {
                         console.log(err);
                     },
                 })
             );
     }
+
+    updateLanguage(id: string, name: string) {
+        return this.httpClient.put(
+            `http://localhost:5000/api/v1/languages/${id}`,
+            { name },
+            { withCredentials: true }
+        )
+		.pipe(
+			tap({
+				next: () => {
+					this.refreshLanguages();
+				},	
+				error: (err) => {
+					console.log(err);
+				}
+			})
+		);
+    }
+
+	deleteLanguage(id: string) {
+        return this.httpClient.delete(
+            `http://localhost:5000/api/v1/languages/${id}`,
+            { withCredentials: true }
+        )
+		.pipe(
+			tap({
+				next: () => {
+					this.refreshLanguages();
+				},	
+				error: (err) => {
+					console.log(err);
+				}
+			})
+		);
+	}
 }

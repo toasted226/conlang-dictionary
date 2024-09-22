@@ -1,3 +1,8 @@
-<a [routerLink]="['languages', language().language_id]" routerLinkActive="selected">
-    {{ language().name }}
-</a>
+<div>
+    <a [routerLink]="['languages', language().language_id]" routerLinkActive="selected">
+        {{ language().name }}
+    </a>
+    @if (authenticated()) {
+        <a class="edit" [routerLink]="['admin', 'languages', language().language_id, 'edit']" routerLinkActive="selected">...</a>
+    }
+</div>

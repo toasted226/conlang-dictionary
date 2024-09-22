@@ -1,0 +1,14 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+    <h1>Editing {{ languageName() === '' || undefined ? '' : languageName() }}</h1>
+    <div class="input-group">
+        <label for="language-name">Language name:</label>
+        <input
+            id="language-name"
+            name="language-name"
+            [value]="languageName()"
+            formControlName="languageName"
+        />
+    </div>
+    <button type="submit">Edit</button>
+    <button (click)="onDelete()">Delete</button>
+</form>

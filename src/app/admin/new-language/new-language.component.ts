@@ -31,15 +31,8 @@ export class NewLanguageComponent {
 				}
 			});
 
-			const getSub = this.languagesService.getLanguages().subscribe({
-				error: (err) => {
-					// Handle errors
-				}
-			});
-
 			this.destroyRef.onDestroy(() => {
 				postSub.unsubscribe();
-				getSub.unsubscribe();
 			});
 		}
 	}

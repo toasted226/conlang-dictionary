@@ -3,7 +3,7 @@ import db from "../db/database";
 
 export const getLanguages = async (req: Request, res: Response) => {
     try {
-        const result = await db.query("SELECT * FROM languages");
+        const result = await db.query("SELECT * FROM languages ORDER BY name ASC");
         res.status(200).json(result.rows);
     } catch (err) {
         console.log(err);

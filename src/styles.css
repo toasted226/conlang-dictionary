@@ -50,6 +50,12 @@ a {
     border: 2px solid var(--main4);
 }
 
+.form > h1 {
+    margin: 0;
+    padding: 0;
+    font-size: x-large;
+}
+
 .input-group {
     margin-bottom: 10px;
 }
