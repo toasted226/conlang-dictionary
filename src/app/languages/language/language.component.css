@@ -1,19 +1,19 @@
 a {
     display: block;
-    width: 120px;
-    background-color: var(--purple3);
+    width: 20vw;
+    background-color: var(--main4);
     font-size: large;
-    color: var(--beige);
+    color: var(--main1);
     text-align: center;
     user-select: none;
     text-decoration: none;
-    border: 2px solid var(--purple3);
+    border: 2px solid var(--main4);
 }
 
 .selected {
-    color: var(--purple3);
-    background-color: var(--purple2);
-    border: 2px solid var(--purple3);
+    color: var(--main4);
+    background-color: var(--main3);
+    border: 2px solid var(--main4);
 }
 
 @media (max-width: 800px) {

@@ -1,4 +1,8 @@
 <header>
     <h1>Conlang Dictionary</h1>
-    <a [routerLink]="['login']" routerLinkActive="selected">Admin Sign In</a>
+    <a [routerLink]="['login']" routerLinkActive="selected">{{
+        username() === ""
+            ? "Admin Sign In"
+            : username()
+    }}</a>
 </header>

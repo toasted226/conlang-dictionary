@@ -1,9 +1,9 @@
 form {
     width: fit-content;
     padding: 20px;
-    color: var(--purple3);
-    background-color: var(--purple1);
-    border: 2px solid var(--purple3);
+    color: var(--main4);
+    background-color: var(--main2);
+    border: 2px solid var(--main4);
 }
 
 h1 {
@@ -23,23 +23,26 @@ input {
     height: 2em;
     font-family: "Poppins", system-ui;
     font-size: medium;
+    color: var(--foreground);
+    background-color: var(--background);
+    border: 2px solid var(--main3);
 }
 
 button {
     border: none;
-    color: var(--beige);
-    background-color: var(--purple3);
+    color: var(--main1);
+    background-color: var(--main4);
     font-size: medium;
     height: 2em;
     width: 5em;
 }
 button:hover {
-    color: var(--purple3);
-    background-color: var(--purple2);
-    border: 2px solid var(--purple3);
+    color: var(--main4);
+    background-color: var(--main3);
+    border: 2px solid var(--main4);
 }
 button:active {
-    background-color: var(--purple1);
+    background-color: var(--main2);
 }
 
 @media (max-width: 800px) {

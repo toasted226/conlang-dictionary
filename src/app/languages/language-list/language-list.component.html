@@ -2,4 +2,7 @@
     @for(language of languages(); track language.language_id) {
         <app-language [language]="language" />
     }
+    @if (authenticated()) {
+        <a [routerLink]="['admin', 'languages', 'add']" routerLinkActive="selected">+</a>
+    }
 </article>

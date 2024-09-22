@@ -1,10 +1,11 @@
 section {
-    background-color: white;
+    color: var(--foreground);
+    background-color: var(--background);
     width: 85%;
     height: auto;
     padding: 10px;
     margin-top: 10px;
-    border: 2px solid var(--purple3);
+    border: 2px solid var(--main4);
 }
 
 div {
@@ -30,7 +31,7 @@ p {
 }
 
 .ipa {
-    color: #707070;
+    color: var(--midground);
     font-size: large;
 }
 

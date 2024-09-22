@@ -7,8 +7,30 @@ article {
     gap: 5px;
 }
 
+a {
+    display: block;
+    width: 20vw;
+    background-color: var(--main1);
+    font-size: large;
+    font-weight: 500;
+    color: var(--main4);
+    text-align: center;
+    user-select: none;
+    text-decoration: none;
+    border: 2px solid var(--main4);
+}
+
+.selected {
+    background-color: var(--main2);
+    border: 2px solid var(--main4);
+}
+
 @media (max-width: 800px) {
     article {
         width: 90%;
+    }
+
+    a {
+        width: 100%;
     }
 }

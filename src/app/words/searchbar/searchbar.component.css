@@ -7,9 +7,9 @@ input {
     width: 80%;
     font-family: "Poppins", system-ui;
     font-size: large;
-    background-color: white;
+    background-color: var(--background);
     border: none;
-    border-bottom: 2px dashed var(--purple2);
+    border-bottom: 2px dashed var(--main3);
 
     transition-property: border;
     transition-duration: 500ms;
@@ -17,26 +17,26 @@ input {
 }
 input:focus {
     outline: none;
-    border-bottom: 2px solid var(--purple3);
+    border-bottom: 2px solid var(--main2);
 }
 
 button {
-    color: var(--beige);
-    background-color: var(--purple3);
-    border: 2px solid var(--purple3);
+    color: var(--main1);
+    background-color: var(--main4);
+    border: 2px solid var(--main4);
     font-family: "Poppins", system-ui;
     font-size: large;
     padding-inline: 10px;
 }
 button:hover {
-    color: var(--purple3);
-    background-color: var(--purple2);
-    border: 2px solid var(--purple3);
+    color: var(--main4);
+    background-color: var(--main3);
+    border: 2px solid var(--main4);
 }
 button:active {
-    color: var(--purple3);
-    background-color: var(--purple1);
-    border: 2px solid var(--purple3);
+    color: var(--main4);
+    background-color: var(--main2);
+    border: 2px solid var(--main4);
 }
 
 @media (max-width: 800px) {

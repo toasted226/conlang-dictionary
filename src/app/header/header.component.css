@@ -6,12 +6,14 @@ header {
     padding: 0;
     width: 100%;
     height: fit-content;
-    background-color: var(--purple1);
+    background-color: var(--main2);
+    border-bottom: 2px solid var(--main4);
+    user-select: none;
 }
 
 h1 {
     margin: 0;
-    color: var(--purple3);
+    color: var(--main4);
     font-size: xx-large;
     padding-inline: 1em;
 }
@@ -25,22 +27,22 @@ a {
     border: none;
     padding-inline: 1em;
     text-decoration: none;
-    color: var(--beige);
-    background-color: var(--purple3);
-    border-left: 2px solid var(--purple3);
+    color: var(--main1);
+    background-color: var(--main4);
+    border-left: 2px solid var(--main4);
 }
 a:hover {
-    border-left: 2px solid var(--purple3);
-    color: var(--purple3);
-    background-color: var(--purple2);
+    border-left: 2px solid var(--main4);
+    color: var(--main4);
+    background-color: var(--main3);
 }
 a:active {
-    background-color: var(--purple1);
+    background-color: var(--main2);
 }
 
 .selected {
-    color: var(--purple3);
-    background-color: var(--purple2);
+    color: var(--main4);
+    background-color: var(--main3);
 }
 
 @media (max-width: 800px) {

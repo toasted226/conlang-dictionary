@@ -11,7 +11,7 @@ const app: Application = express();
 const corsOptions = {
     optionSuccessStatus: 200,
     credentials: true,
-    origin: "*",
+    origin: "http://localhost:4200",
 };
 app.use(cors(corsOptions));
 

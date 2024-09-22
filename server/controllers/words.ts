@@ -22,7 +22,7 @@ export const getWords = async (req: Request, res: Response) => {
         res.status(200).json(result.rows);
     } catch (err) {
         console.log(err);
-        res.status(500).send("Database query failed");
+        res.status(500).json({ error: "Database query failed" });
     }
 };
 
@@ -60,7 +60,7 @@ export const addWord = async (req: Request, res: Response) => {
         res.status(201).json({ success: true });
     } catch (err) {
         console.log(err);
-        res.status(500).send("Database update failed");
+        res.status(500).json({ error: "Database update failed" });
     }
 };
 
