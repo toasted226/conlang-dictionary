@@ -1,48 +1,7 @@
-form {
-    width: fit-content;
-    padding: 20px;
-    color: var(--main4);
-    background-color: var(--main2);
-    border: 2px solid var(--main4);
-}
-
 h1 {
     font-size: x-large;
     padding: 0;
     margin: 0 0 10px 0;
-}
-
-.input-group {
-    margin-bottom: 10px;
-}
-
-input {
-    display: block;
-    width: 20em;
-    border: 0;
-    height: 2em;
-    font-family: "Poppins", system-ui;
-    font-size: medium;
-    color: var(--foreground);
-    background-color: var(--background);
-    border: 2px solid var(--main3);
-}
-
-button {
-    border: none;
-    color: var(--main1);
-    background-color: var(--main4);
-    font-size: medium;
-    height: 2em;
-    width: 5em;
-}
-button:hover {
-    color: var(--main4);
-    background-color: var(--main3);
-    border: 2px solid var(--main4);
-}
-button:active {
-    background-color: var(--main2);
 }
 
 @media (max-width: 800px) {

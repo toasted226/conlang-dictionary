@@ -7,21 +7,41 @@ import { tap } from "rxjs";
     providedIn: "root",
 })
 export class LanguagesService {
-	private languages = signal<Language[]>([]);
-	allLanguages = this.languages.asReadonly();
+    private languages = signal<Language[]>([]);
+    allLanguages = this.languages.asReadonly();
 
-	private httpClient = inject(HttpClient);
+    private httpClient = inject(HttpClient);
 
-	getLanguages() {
-		return this.httpClient.get<Language[]>("http://localhost:5000/api/v1/languages/").pipe(
-			tap({
-				next: (languages) => {
-					this.languages.set(languages);
-				},
-				error: (err) => {
-					console.log(err);
-				}
-			})
-		);
-	}
+    getLanguages() {
+        return this.httpClient
+            .get<Language[]>("http://localhost:5000/api/v1/languages/")
+            .pipe(
+                tap({
+                    next: (languages) => {
+                        this.languages.set(languages);
+                    },
+                    error: (err) => {
+                        console.log(err);
+                    },
+                })
+            );
+    }
+
+    newLanguage(name: string) {
+        return this.httpClient
+            .post(
+                "http://localhost:5000/api/v1/languages",
+                { name },
+                {
+                    withCredentials: true,
+                }
+            )
+            .pipe(
+                tap({
+                    error: (err) => {
+                        console.log(err);
+                    },
+                })
+            );
+    }
 }

@@ -2,7 +2,8 @@ import { Routes } from '@angular/router';
 import { WordsListComponent } from './words/words-list/words-list.component';
 import { NoWordsComponent } from './words/no-words/no-words.component';
 import { LoginComponent } from './auth/login/login.component';
-import { AddLanguageComponent } from './admin/add-language/add-language.component';
+import { AdminComponent } from './admin/admin.component';
+import { NewLanguageComponent } from './admin/new-language/new-language.component';
 
 export const routes: Routes = [
     {
@@ -15,8 +16,14 @@ export const routes: Routes = [
         component: WordsListComponent,
     },
     {
-        path: "admin/languages/add",
-        component: AddLanguageComponent,
+        path: "admin",
+        component: AdminComponent,
+        children: [
+            {
+                path: "languages/new",
+                component: NewLanguageComponent,
+            }
+        ]
     },
     {
         path: "login",
