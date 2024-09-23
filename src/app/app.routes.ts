@@ -5,6 +5,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { NewLanguageComponent } from './admin/new-language/new-language.component';
 import { EditLanguageComponent } from './admin/edit-language/edit-language.component';
+import { NewWordComponent } from './admin/new-word/new-word.component';
 
 export const routes: Routes = [
     {
@@ -27,6 +28,10 @@ export const routes: Routes = [
             {
                 path: "languages/:languageId/edit",
                 component: EditLanguageComponent,
+            },
+            {
+                path: "languages/:languageId/words/new",
+                component: NewWordComponent,
             }
         ]
     },

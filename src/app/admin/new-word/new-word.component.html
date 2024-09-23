@@ -1,0 +1,68 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+    <h1>Editing {{ languageName() }}</h1>
+    <h2>New word</h2>
+    <div class="input-group">
+        <div class="input-row">
+            <p>
+                <label for="word">Word:</label>
+                <input
+                    type="text"
+                    id="word"
+                    name="word"
+                    autocomplete="off"
+                    formControlName="word"
+                />
+            </p>
+            <p class="part-of-speech">
+                <label for="part-of-speech">Part of Speech:</label>
+                <input
+                    type="text"
+                    id="part-of-speech"
+                    name="part-of-speech"
+                    autocomplete="off"
+                    formControlName="partOfSpeech"
+                />
+            </p>
+        </div>
+
+        <label for="translation">Translation:</label>
+        <input
+            type="text"
+            id="translation"
+            name="translation"
+            autocomplete="off"
+            formControlName="translation"
+        />
+    </div>
+    <div class="input-group">
+        <label for="ipa">Phonetic Transcription:</label>
+        <input
+            type="text"
+            id="ipa"
+            name="ipa"
+            autocomplete="off"
+            formControlName="phoneticTranscription"
+        />
+    </div>
+    <div class="input-group">
+        <label for="example">Example Sentence:</label>
+        <textarea
+            rows="4"
+            id="example"
+            name="example"
+            autocomplete="off"
+            formControlName="example"
+        ></textarea>
+
+        <label for="example-translation">Example Sentence Translation:</label>
+        <textarea
+            rows="4"
+            id="example-translation"
+            name="example-translation"
+            autocomplete="off"
+            formControlName="exampleTranslation"
+        ></textarea>
+    </div>
+    <p>{{ creationMessage() }}</p>
+    <button type="submit">Create</button>
+</form>

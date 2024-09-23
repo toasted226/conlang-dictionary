@@ -1,4 +1,5 @@
 <app-searchbar [languageName]="languageName()" />
+<a [routerLink]="'/admin/languages/' + languageId() + '/words/new'">+</a>
 @for (word of words(); track word.word_id) {
     <app-word [word]="word" />
 }

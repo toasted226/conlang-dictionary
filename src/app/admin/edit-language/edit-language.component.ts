@@ -36,11 +36,12 @@ export class EditLanguageComponent implements OnInit {
 
     languageId = signal<string>("1");
     languageName = computed(
-        () =>
-            this.languagesService
+        () => {
+            return this.languagesService
                 .allLanguages()
                 .find((l) => l.language_id.toString() === this.languageId())
-                ?.name
+                ?.name;
+        }
     );
 
     ngOnInit(): void {
@@ -89,6 +90,6 @@ export class EditLanguageComponent implements OnInit {
 
 		setTimeout(() => {
 			this.router.navigateByUrl(this.router.parseUrl(""));
-		}, 10);		
+		}, 10);
     }
 }

@@ -26,6 +26,9 @@ export class NewLanguageComponent {
 
 		if (this.form.controls.languageName !== null) {
 			const postSub = this.languagesService.newLanguage(this.form.value.languageName!).subscribe({
+				next: () => {
+					this.form.reset();
+				},
 				error: (err) => {
 					// Handle errors
 				}

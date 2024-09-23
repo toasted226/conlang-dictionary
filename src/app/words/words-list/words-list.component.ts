@@ -1,24 +1,22 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    computed,
     DestroyRef,
     inject,
-    input,
     OnInit,
     signal,
 } from "@angular/core";
 import { SearchbarComponent } from "../searchbar/searchbar.component";
 import { LanguagesService } from "../../languages/languages.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, RouterLink } from "@angular/router";
 import { WordsService } from "../words.service";
 import { WordComponent } from "../word/word.component";
-import { Word } from "../words.model";
+import { AuthService } from "../../auth/auth.service";
 
 @Component({
     selector: "app-words-list",
     standalone: true,
-    imports: [SearchbarComponent, WordComponent],
+    imports: [SearchbarComponent, WordComponent, RouterLink],
     templateUrl: "./words-list.component.html",
     styleUrl: "./words-list.component.css",
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,12 +24,14 @@ import { Word } from "../words.model";
 export class WordsListComponent implements OnInit {
     private languagesService = inject(LanguagesService);
     private wordsService = inject(WordsService);
+    private authService = inject(AuthService);
     private destroyRef = inject(DestroyRef);
     private activatedRoute = inject(ActivatedRoute);
 
     languageId = signal<string | null>("1");
     languageName = signal<string | undefined>("");
-    words = this.wordsService.words;
+    words = this.wordsService.allWords;
+    authenticated = this.authService.isAuthenticated;
 
     ngOnInit(): void {
         const paramSub = this.activatedRoute.paramMap.subscribe({

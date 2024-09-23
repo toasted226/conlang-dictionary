@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from "@angular/core";
-import { Word } from "./words.model";
+import { Word, WordData } from "./words.model";
 import { HttpClient } from "@angular/common/http";
 import { tap } from "rxjs";
 
@@ -7,8 +7,8 @@ import { tap } from "rxjs";
     providedIn: "root",
 })
 export class WordsService {
-    words = signal<Word[]>([]);
-    private allWords = this.words.asReadonly();
+    private words = signal<Word[]>([]);
+    allWords = this.words.asReadonly();
 
     private httpClient = inject(HttpClient);
 
@@ -19,16 +19,32 @@ export class WordsService {
         }
 
         return this.httpClient
-            .get<Word[]>("http://localhost:5000/api/v1/words/" + languageId + searchQuery)
+            .get<Word[]>(
+                "http://localhost:5000/api/v1/words/" + languageId + searchQuery
+            )
             .pipe(
-				tap({
-					next: (words) => {
-						this.words.set(words);
-					},
-					error: (err) => {
-						console.log(err);
-					}
-				})
-			);
+                tap({
+                    next: (words) => {
+                        this.words.set(words);
+                    },
+                    error: (err) => {
+                        console.log(err);
+                    },
+                })
+            );
+    }
+
+    newWord(languageId: string, word: WordData) {
+        return this.httpClient
+            .post(`http://localhost:5000/api/v1/words/${languageId}`, word, {
+                withCredentials: true,
+            })
+            .pipe(
+                tap({
+                    error: (err) => {
+                        console.log(err);
+                    },
+                })
+            );
     }
 }

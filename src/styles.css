@@ -55,21 +55,37 @@ a {
     padding: 0;
     font-size: x-large;
 }
+.form > h2 {
+    margin: 0;
+    padding: 0;
+    font-size: large;
+}
 
 .input-group {
     margin-bottom: 10px;
 }
 
-input {
+.input-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+input, textarea {
     display: block;
     width: 20em;
     border: 0;
-    height: 2em;
     font-family: "Poppins", system-ui;
     font-size: medium;
     color: var(--foreground);
     background-color: var(--background);
     border: 2px solid var(--main3);
+}
+input {
+    height: 2em;
+}
+textarea {
+    resize: none;
 }
 
 button {
@@ -105,7 +121,7 @@ input.ng-invalid.ng-touched.ng-dirty {
         width: 85%;
     }
 
-    .input-group > input {
+    .input-group > input, textarea {
         width: 100%;
     }
 
@@ -113,7 +129,7 @@ input.ng-invalid.ng-touched.ng-dirty {
         width: 100%;
     }
 
-    .form > h1 {
+    .form > h1, h2 {
         text-align: center;
     }
 }

@@ -1,0 +1,34 @@
+.part-of-speech {
+    margin-left: 10px;
+}
+
+.input-row {
+    width: 25em;
+}
+
+.input-row > p > input {
+    width: 100%;
+}
+
+input, textarea {
+    width: 25em;
+}
+
+p {
+    font-weight: 500;
+}
+
+@media (max-width: 800px) {
+    .input-row {
+        display: block;
+        width: 100%;
+    }
+
+    .part-of-speech {
+        margin: 0;
+    }
+
+    input, textarea {
+        width: 100%;
+    }
+}

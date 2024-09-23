@@ -48,6 +48,7 @@ export const updateLanguage = async (req: Request, res: Response) => {
 export const deleteLanguage = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
+        await db.query("DELETE FROM words WHERE language_id = $1", [id]);
         await db.query("DELETE FROM languages WHERE language_id = $1", [id]);
         res.status(200).json({success: true});
     } catch (err) {

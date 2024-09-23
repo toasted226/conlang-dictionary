@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import db from "../db/database";
 import dotenv from "dotenv";
 dotenv.config();
@@ -38,6 +38,11 @@ export const login = async (req: Request, res: Response) => {
 
 export const authenticated = (req: Request & { user?: string }, res: Response) => {
     return res.status(200).json({ username: req.user });
+};
+
+export const logout = (_: Request, res: Response) => {
+    res.clearCookie("token");
+    return res.status(200).json({ auth: false });
 };
 
 const hashPassword = async (plainTextPassword: string) => {

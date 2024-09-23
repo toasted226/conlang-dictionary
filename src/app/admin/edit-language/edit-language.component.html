@@ -5,7 +5,7 @@
         <input
             id="language-name"
             name="language-name"
-            [value]="languageName()"
+            [placeholder]="languageName() === '' || undefined ? '' : languageName()"
             formControlName="languageName"
         />
     </div>
