@@ -33,15 +33,32 @@ export class AuthService {
             );
     }
 
+    signOut() {
+        return this.httpClient.get(
+            "http://localhost:5000/api/v1/users/logout",
+            { withCredentials: true }
+        ).pipe(
+            tap({
+                next: () => {
+                    this.auth.set(false);
+                    this.username.set("");
+                }
+            })
+        );
+    }
+
     checkAuth() {
         return this.httpClient
-            .get<{username: string}>("http://localhost:5000/api/v1/users/login", {
-                withCredentials: true,
-            })
+            .get<{ username: string }>(
+                "http://localhost:5000/api/v1/users/login",
+                {
+                    withCredentials: true,
+                }
+            )
             .pipe(
                 tap({
                     next: (user) => {
-						this.username.set(user.username);
+                        this.username.set(user.username);
                         this.auth.set(true);
                     },
                     error: () => {

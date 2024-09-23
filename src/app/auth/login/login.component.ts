@@ -36,7 +36,7 @@ export class LoginComponent {
 				password: this.form.controls.password.value
 			}).subscribe({
 				next: () => {
-					console.log("Welcome, " + this.authService.signedInUsername());
+					
 				},
 				error: (err: Error) => {
 					console.log(err.message);

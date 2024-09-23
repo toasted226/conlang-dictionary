@@ -1,3 +1,7 @@
+.unauthenticated {
+    width: 20em;
+}
+
 div {
     display: flex;
     justify-content: space-between;
