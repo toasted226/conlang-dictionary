@@ -8,7 +8,13 @@ import {
 } from "@angular/core";
 import { SearchbarComponent } from "../searchbar/searchbar.component";
 import { LanguagesService } from "../../languages/languages.service";
-import { ActivatedRoute, RouterLink } from "@angular/router";
+import {
+    ActivatedRoute,
+    ActivatedRouteSnapshot,
+    ResolveFn,
+    RouterLink,
+    RouterStateSnapshot,
+} from "@angular/router";
 import { WordsService } from "../words.service";
 import { WordComponent } from "../word/word.component";
 import { AuthService } from "../../auth/auth.service";
@@ -49,7 +55,7 @@ export class WordsListComponent implements OnInit {
                 } else {
                     this.onLanguageIdUpdate();
                 }
-            }
+            },
         });
 
         this.destroyRef.onDestroy(() => {
@@ -81,3 +87,17 @@ export class WordsListComponent implements OnInit {
         );
     }
 }
+
+export const resolveTitle: ResolveFn<string> = (
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+) => {
+    const languagesService = inject(LanguagesService);
+    const languageName = languagesService
+        .allLanguages()
+        .find(
+            (l) => l.language_id.toString() === route.paramMap.get("languageId")
+        )?.name;
+
+    return languageName ? languageName : "Language";
+};

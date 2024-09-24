@@ -9,6 +9,9 @@ header {
     background-color: var(--main2);
     border-bottom: 2px solid var(--main4);
     user-select: none;
+    position: sticky;
+    top: 0;
+    z-index: 2;
 }
 
 h1 {

@@ -5,6 +5,10 @@ article {
     flex-direction: column;
     justify-content: flex-start;
     gap: 5px;
+
+    position: sticky;
+    top: 60px;
+    z-index: 1;
 }
 
 a {
