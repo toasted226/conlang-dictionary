@@ -1,7 +1,12 @@
 <section>
     <div>
-        <h1>{{ word().word }}</h1>
-        <i>{{ word().part_of_speech }}</i>
+        <div class="header">
+            <h1>{{ word().word }}</h1>
+            <i>{{ word().part_of_speech }}</i>
+        </div>
+        @if (authenticated()) {
+            <a [routerLink]="'/admin/languages/' + word().language_id + '/words/' + word().word_id + '/edit'">...</a>
+        }
     </div>
     <p class="ipa"><code>{{ word().phonetic_transcription }}</code></p>
     <p>{{ word().translation }}</p>

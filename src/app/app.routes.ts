@@ -6,6 +6,7 @@ import { AdminComponent } from './admin/admin.component';
 import { NewLanguageComponent } from './admin/new-language/new-language.component';
 import { EditLanguageComponent } from './admin/edit-language/edit-language.component';
 import { NewWordComponent } from './admin/new-word/new-word.component';
+import { EditWordComponent } from './admin/edit-word/edit-word.component';
 
 export const routes: Routes = [
     {
@@ -33,6 +34,10 @@ export const routes: Routes = [
             {
                 path: "languages/:languageId/words/new",
                 component: NewWordComponent,
+            },
+            {
+                path: "languages/:languageId/words/:wordId/edit",
+                component: EditWordComponent,
             }
         ]
     },

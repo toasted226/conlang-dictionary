@@ -47,4 +47,36 @@ export class WordsService {
                 })
             );
     }
+
+    updateWord(languageId: string, wordId: string, word: WordData) {
+        return this.httpClient
+            .put(
+                `http://localhost:5000/api/v1/words/${languageId}/${wordId}`,
+                word,
+                {
+                    withCredentials: true,
+                }
+            )
+            .pipe(
+                tap({
+                    error: (err) => {
+                        console.log(err);
+                    },
+                })
+            );
+    }
+
+    deleteWord(languageId: string, wordId: string) {
+        return this.httpClient.delete(
+            `http://localhost:5000/api/v1/words/${languageId}/${wordId}`,
+            { withCredentials: true }
+        )
+        .pipe(
+            tap({
+                error: (err) => {
+                    console.log(err);
+                }
+            })
+        );
+    }
 }
