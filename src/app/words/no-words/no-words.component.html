@@ -1,1 +1,4 @@
 <h1>Select a language to get started.</h1>
+<a [routerLink]="authenticated() ? ['admin', 'languages', 'new'] : ['login']">
+    ... Or if you're an admin, add a new language
+</a>
