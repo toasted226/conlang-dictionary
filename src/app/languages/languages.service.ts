@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { DestroyRef, inject, Injectable, signal } from "@angular/core";
 import { Language } from "./languages.model";
 import { tap } from "rxjs";
+import { apiEndpoint } from "../app.config";
 
 @Injectable({
     providedIn: "root",
@@ -20,7 +21,7 @@ export class LanguagesService {
 
     getLanguages() {
         return this.httpClient
-            .get<Language[]>("http://localhost:5000/api/v1/languages/")
+            .get<Language[]>(apiEndpoint + "/languages/")
             .pipe(
                 tap({
                     next: (languages) => {
@@ -36,7 +37,7 @@ export class LanguagesService {
     newLanguage(name: string) {
         return this.httpClient
             .post(
-                "http://localhost:5000/api/v1/languages",
+                apiEndpoint + "/languages",
                 { name },
                 { withCredentials: true }
             )
@@ -54,7 +55,7 @@ export class LanguagesService {
 
     updateLanguage(id: string, name: string) {
         return this.httpClient.put(
-            `http://localhost:5000/api/v1/languages/${id}`,
+            `${apiEndpoint}/languages/${id}`,
             { name },
             { withCredentials: true }
         )
@@ -72,7 +73,7 @@ export class LanguagesService {
 
 	deleteLanguage(id: string) {
         return this.httpClient.delete(
-            `http://localhost:5000/api/v1/languages/${id}`,
+            `${apiEndpoint}/languages/${id}`,
             { withCredentials: true }
         )
 		.pipe(

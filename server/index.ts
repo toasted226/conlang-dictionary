@@ -28,8 +28,9 @@ app.get("/", (_: Request, res: Response) => {
     res.send("Conlang dictionary server is working!");
 });
 
-const port = process.env.PORT || 5000;
+const port = 5000;
+const host = "localhost";
 
-app.listen(port, () => {
+app.listen(port, host, () => {
     console.log(`Server is running on port ${port}...`);
 });

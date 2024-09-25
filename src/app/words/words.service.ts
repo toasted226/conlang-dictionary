@@ -2,6 +2,7 @@ import { inject, Injectable, signal } from "@angular/core";
 import { Word, WordData } from "./words.model";
 import { HttpClient } from "@angular/common/http";
 import { tap } from "rxjs";
+import { apiEndpoint } from "../app.config";
 
 @Injectable({
     providedIn: "root",
@@ -20,7 +21,7 @@ export class WordsService {
 
         return this.httpClient
             .get<Word[]>(
-                "http://localhost:5000/api/v1/words/" + languageId + searchQuery
+                apiEndpoint + "/words/" + languageId + searchQuery
             )
             .pipe(
                 tap({
@@ -36,7 +37,7 @@ export class WordsService {
 
     newWord(languageId: string, word: WordData) {
         return this.httpClient
-            .post(`http://localhost:5000/api/v1/words/${languageId}`, word, {
+            .post(`${apiEndpoint}/words/${languageId}`, word, {
                 withCredentials: true,
             })
             .pipe(
@@ -51,7 +52,7 @@ export class WordsService {
     updateWord(languageId: string, wordId: string, word: WordData) {
         return this.httpClient
             .put(
-                `http://localhost:5000/api/v1/words/${languageId}/${wordId}`,
+                `${apiEndpoint}/words/${languageId}/${wordId}`,
                 word,
                 {
                     withCredentials: true,
@@ -68,7 +69,7 @@ export class WordsService {
 
     deleteWord(languageId: string, wordId: string) {
         return this.httpClient.delete(
-            `http://localhost:5000/api/v1/words/${languageId}/${wordId}`,
+            `${apiEndpoint}/words/${languageId}/${wordId}`,
             { withCredentials: true }
         )
         .pipe(

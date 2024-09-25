@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable, signal } from "@angular/core";
 import { catchError, tap, throwError } from "rxjs";
+import { apiEndpoint } from "../app.config";
 
 @Injectable({
     providedIn: "root",
@@ -16,7 +17,7 @@ export class AuthService {
 
     signIn(credentials: { username: string; password: string }) {
         return this.httpClient
-            .post("http://localhost:5000/api/v1/users/login", credentials, {
+            .post(apiEndpoint + "/users/login", credentials, {
                 withCredentials: true,
             })
             .pipe(
@@ -35,7 +36,7 @@ export class AuthService {
 
     signOut() {
         return this.httpClient.get(
-            "http://localhost:5000/api/v1/users/logout",
+            apiEndpoint + "/users/logout",
             { withCredentials: true }
         ).pipe(
             tap({
@@ -50,7 +51,7 @@ export class AuthService {
     checkAuth() {
         return this.httpClient
             .get<{ username: string }>(
-                "http://localhost:5000/api/v1/users/login",
+                apiEndpoint + "/users/login",
                 {
                     withCredentials: true,
                 }
