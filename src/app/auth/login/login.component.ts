@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject } from "@angular/core";
+import { Component, DestroyRef, inject, signal } from "@angular/core";
 import { ModalComponent } from "../../shared/modal/modal.component";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { AuthService } from "../auth.service";
@@ -21,6 +21,8 @@ export class LoginComponent {
 		})
 	});
 
+	errorMessage = signal("");
+
 	private authService = inject(AuthService);
 	private destroyRef = inject(DestroyRef);
 	private router = inject(Router);
@@ -36,10 +38,12 @@ export class LoginComponent {
 				password: this.form.controls.password.value
 			}).subscribe({
 				next: () => {
-					
+					this.router.navigateByUrl(this.router.parseUrl(""));
 				},
 				error: (err: Error) => {
 					console.log(err.message);
+					this.errorMessage.set(err.message);
+					setTimeout(() => this.errorMessage.set(""), 5000);
 				}
 			});
 

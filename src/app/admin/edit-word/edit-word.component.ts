@@ -109,6 +109,9 @@ export class EditWordComponent implements OnInit {
 		}
 
 		const subscription = this.wordsService.updateWord(this.languageId()!, this.wordId()!, editedWord).subscribe({
+            next: () => {
+                this.router.navigateByUrl(this.router.parseUrl(`/languages/${this.languageId()!}`));
+            },
 			error: (err) => {
 				// Handle errors
 			}
@@ -123,9 +126,7 @@ export class EditWordComponent implements OnInit {
     onDelete() {
 		const subscription = this.wordsService.deleteWord(this.languageId()!, this.wordId()!).subscribe({
 			next: () => {
-				setTimeout(() => {
-					this.router.navigateByUrl(this.router.parseUrl(`/languages/${this.languageId()}`));
-				}, 10);
+                this.router.navigateByUrl(this.router.parseUrl(`/languages/${this.languageId()}`));
 			},
 			error: (err) => {
 				// Handle errors
