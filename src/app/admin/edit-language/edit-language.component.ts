@@ -79,6 +79,9 @@ export class EditLanguageComponent implements OnInit {
         const deleteSub = this.languagesService
             .deleteLanguage(this.languageId())
             .subscribe({
+                next: () => {
+                    this.router.navigateByUrl(this.router.parseUrl(""));
+                },
 				error: (err) => {
 					// Handle errors
 				}
@@ -87,9 +90,5 @@ export class EditLanguageComponent implements OnInit {
 		this.destroyRef.onDestroy(() => {
 			deleteSub.unsubscribe();
 		});
-
-		setTimeout(() => {
-			this.router.navigateByUrl(this.router.parseUrl(""));
-		}, 10);
     }
 }

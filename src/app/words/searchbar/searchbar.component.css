@@ -19,7 +19,6 @@ div {
 
 input {
     width: 80%;
-    font-family: "Poppins", system-ui;
     font-size: large;
     background-color: var(--background);
     border: none;
