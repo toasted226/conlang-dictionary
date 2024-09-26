@@ -9,7 +9,8 @@ export const getWords = async (req: Request, res: Response) => {
         let query =
             "SELECT * FROM words " +
             "JOIN languages ON languages.language_id = words.language_id " +
-            "WHERE words.language_id = $1 ";
+            "WHERE words.language_id = $1 " + 
+            "ORDER BY words.word ASC";
         let args: string[] = [language];
 
         if (search) {
