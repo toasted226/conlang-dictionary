@@ -15,9 +15,11 @@ export class AdminComponent {
     private router = inject(Router);
 
     signOut() {
-        const signOutSub = this.authService.signOut().subscribe();
-        
-        setTimeout(() => this.router.navigateByUrl(this.router.parseUrl("/login")), 10);
+        const signOutSub = this.authService.signOut().subscribe({
+            next: () => {
+                this.router.navigateByUrl(this.router.parseUrl("/login"));
+            }
+        });
         
         this.destroyRef.onDestroy(() => {
             signOutSub.unsubscribe();
