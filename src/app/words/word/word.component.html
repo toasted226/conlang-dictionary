@@ -8,7 +8,7 @@
             <a [routerLink]="'/admin/languages/' + word().language_id + '/words/' + word().word_id + '/edit'">...</a>
         }
     </div>
-    <p class="ipa"><code>{{ word().phonetic_transcription }}</code></p>
+    <p class="ipa">{{ word().phonetic_transcription }}</p>
     <p>{{ word().translation }}</p>
     <p class="example">{{ word().example }}</p>
     <p class="example">{{ word().example_translation }}</p>
