@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject, OnInit, signal } from "@angular/core";
 import { LanguagesService } from "../../languages/languages.service";
 import { WordData } from "../../words/words.model";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { WordsService } from "../../words/words.service";
 
@@ -32,6 +32,7 @@ export class NewWordComponent implements OnInit {
 	private wordsService = inject(WordsService);
     private activatedRoute = inject(ActivatedRoute);
 	private destroyRef = inject(DestroyRef);
+	private router = inject(Router);
 
     languageId = signal<string | undefined>("");
     languageName = signal<string | undefined>("");
@@ -83,6 +84,7 @@ export class NewWordComponent implements OnInit {
 				this.creationMessage.set(`Added ${word.word} to ${this.languageName()} dictionary`);
 				setTimeout(() => this.creationMessage.set(""), 2000);
 				this.form.reset();
+				this.router.navigateByUrl(this.router.parseUrl(`/languages/${this.languageId()}`));
 			},
 			error: (err) => {
 				// Handle errors
