@@ -12,3 +12,6 @@
     />
     <button>Search</button>
 </form>
+@if (authenticated()) {
+<a [routerLink]="'/admin/languages/' + languageId() + '/words/new'">+</a>
+}
