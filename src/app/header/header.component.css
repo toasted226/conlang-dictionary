@@ -8,17 +8,31 @@ header {
     height: fit-content;
     background-color: var(--main2);
     border-bottom: 2px solid var(--main4);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     user-select: none;
     position: sticky;
     top: 0;
     z-index: 2;
 }
 
+.heading {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    color: var(--main4);
+    gap: 1em;
+    margin-left: 1em;
+}
+
 h1 {
     margin: 0;
-    color: var(--main4);
     font-size: xx-large;
-    padding-inline: 1em;
+}
+
+h2 {
+    margin: 0;
+    font-size: large;
 }
 
 a {
@@ -48,13 +62,24 @@ a:active {
 }
 
 @media (max-width: 800px) {
+    .heading {
+        gap: 0;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
     header {
         display: flex;
         justify-content: space-between;
+        height: fit-content;
     }
 
     h1 {
-        font-size: large;
+        font-size: x-large;
+    }
+
+    h2 {
+        font-size: small;
     }
 
     a {
