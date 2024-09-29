@@ -4,7 +4,7 @@ import db from "../db/database";
 export const getWords = async (req: Request, res: Response) => {
     try {
         const { language } = req.params;
-        let search: string | undefined = req.query.search?.toString();
+        let search: string | undefined = req.query.search?.toString().toLowerCase();
 
         let query =
             "SELECT * FROM words " +
@@ -12,12 +12,14 @@ export const getWords = async (req: Request, res: Response) => {
             "WHERE words.language_id = $1 ";
         let args: string[] = [language];
 
-        let ordering = "ORDER BY words.word ASC"
+        let ordering = "ORDER BY words.word ASC";
 
         if (search) {
             search += "%";
-            query += "AND words.word LIKE $2 ";
+            const exampleSearch = "%" + search;
+            query += "AND LOWER(words.word) LIKE $2 OR LOWER(words.example) LIKE $3 ";
             args.push(search);
+            args.push(exampleSearch);
         }
 
         query += ordering;
