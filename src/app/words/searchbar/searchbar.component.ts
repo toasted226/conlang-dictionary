@@ -20,7 +20,17 @@ export class SearchbarComponent {
     search = signal<string>("");
     authenticated = this.authService.isAuthenticated;
 
+    onTextChanged() {
+        if (this.search() === "") {
+            this.refreshPage();
+        }
+    }
+
     onSubmit() {
+        this.refreshPage();
+    }
+
+    refreshPage() {
         const queryParams: Params = { search: this.search() };
 
         this.router.navigate([], {
