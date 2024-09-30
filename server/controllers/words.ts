@@ -17,7 +17,7 @@ export const getWords = async (req: Request, res: Response) => {
         if (search) {
             search += "%";
             const exampleSearch = "%" + search;
-            query += "AND LOWER(words.word) LIKE $2 OR LOWER(words.example) LIKE $3 ";
+            query += "AND LOWER(words.word) LIKE $2 OR words.language_id = $1 AND LOWER(words.example) LIKE $3 ";
             args.push(search);
             args.push(exampleSearch);
         }
