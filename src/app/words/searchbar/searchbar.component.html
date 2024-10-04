@@ -1,14 +1,14 @@
 <div></div>
-<form (ngSubmit)="onSubmit()" (input)="onTextChanged()">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
     <input
         type="search"
         name="search"
         id="search"
         autocomplete="off"
-        [(ngModel)]="search"
         [placeholder]="
             languageName() ? 'Search words in ' + languageName() : ''
         "
+        formControlName="search"
     />
     <button>Search</button>
 </form>

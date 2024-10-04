@@ -1,13 +1,14 @@
-import { Component, inject, input, OnInit, signal } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { Component, inject, OnInit, signal } from "@angular/core";
+import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Params, Router, RouterLink } from "@angular/router";
 import { AuthService } from "../../auth/auth.service";
 import { LanguagesService } from "../../languages/languages.service";
+import { debounceTime } from "rxjs";
 
 @Component({
     selector: "app-searchbar",
     standalone: true,
-    imports: [FormsModule, RouterLink],
+    imports: [ReactiveFormsModule, RouterLink],
     templateUrl: "./searchbar.component.html",
     styleUrl: "./searchbar.component.css",
 })
@@ -17,6 +18,11 @@ export class SearchbarComponent implements OnInit {
     private authService = inject(AuthService);
     private languagesService = inject(LanguagesService);
 
+    form = new FormGroup({
+        search: new FormControl("", {
+            validators: []
+        })
+    });
     languageId = signal<string | null>("");
     languageName = signal<string | undefined>("");
     search = signal<string>("");
@@ -41,15 +47,17 @@ export class SearchbarComponent implements OnInit {
                 });
             },
         });
-    }
 
-    onTextChanged() {
-        if (this.search() === "") {
-            this.refreshPage();
-        }
+        this.form.controls.search.valueChanges.pipe(debounceTime(500)).subscribe({
+            next: (value) => {
+                this.search.set(value ? value! : "");
+                this.refreshPage();
+            }
+        });
     }
 
     onSubmit() {
+        this.search.set(this.form.value.search ? this.form.value.search! : "");
         this.refreshPage();
     }
 
