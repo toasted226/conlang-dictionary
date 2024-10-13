@@ -1,10 +1,19 @@
 package routes
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"ouenjs.com/go-server/middleware"
+)
 
 func RegisterRoutes(server *gin.Engine) {
-	server.GET("/api/v2/languages", getLanguages)
-	server.GET("/api/v2/languages/:id", getLanguage)
+	mainGroup := server.Group("/api/v2")
+	mainGroup.GET("/languages", getLanguages)
+	mainGroup.GET("/languages/:id", getLanguage)
 
-	server.POST("/api/v2/login", login)
+	mainGroup.POST("/login", login)
+	mainGroup.POST("/create", createAccount)
+
+	authGroup := server.Group("/api/v2")
+	authGroup.Use(middleware.Authenticate)
+	authGroup.GET("/login", authenticated)
 }

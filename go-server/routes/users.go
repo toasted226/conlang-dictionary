@@ -28,6 +28,7 @@ func login(context *gin.Context) {
 
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to generate token", "error": err})
+		return
 	}
 
 	context.SetCookie(
@@ -41,4 +42,35 @@ func login(context *gin.Context) {
 	)
 
 	context.JSON(http.StatusOK, gin.H{"message": "Logged in successfully!"})
+}
+
+func createAccount(context *gin.Context) {
+	var user models.User
+	err := context.ShouldBindJSON(&user)
+
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse request data.", "error": err})
+		return
+	}
+
+	err = user.Save()
+
+	if err != nil {
+		context.JSON(http.StatusUnauthorized, gin.H{"message": "Could not create account. Try again later.", "error": err})
+		return
+	}
+
+	context.JSON(http.StatusCreated, gin.H{"message": "Successfully created account!"})
+}
+
+func authenticated(context *gin.Context) {
+	userId := context.GetInt64("userId")
+	username, err := models.GetUsername(userId)
+
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": "Could not get username. Try again later.", "username": username})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"username": username})
 }
