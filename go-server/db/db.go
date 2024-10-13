@@ -9,17 +9,11 @@ import (
 	_ "github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/jackc/pgx/v5/stdlib"
-	"github.com/joho/godotenv"
 )
 
 var DB *sql.DB
 
 func InitDB() {
-	err := godotenv.Load()
-	if err != nil {
-		panic("Failed to load dotenv.")
-	}
-
 	dbUser := os.Getenv("DB_USER")
 	dbPassword := os.Getenv("DB_PASSWORD")
 	dbHost := os.Getenv("DB_HOST")
@@ -56,5 +50,23 @@ func createTables() {
 	if err != nil {
 		fmt.Println(err)
 		panic("Failed to create languages table!")
+	}
+
+	createUsersTable := `
+	CREATE TABLE IF NOT EXISTS users (
+		user_id SERIAL PRIMARY KEY,
+		username VARCHAR(20) NOT NULL,
+		password VARCHAR(200) NOT NULL
+	)
+	`
+	stmt, err = DB.Prepare(createUsersTable)
+	if err != nil {
+		fmt.Println(err)
+		panic("Failed to create users table!")
+	}
+	_, err = stmt.Exec()
+	if err != nil {
+		fmt.Println(err)
+		panic("Failed to create users table!")
 	}
 }
