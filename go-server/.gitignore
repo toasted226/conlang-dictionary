@@ -1,0 +1,16 @@
+/.history
+
+*.exe
+*.dll
+*.so
+*.exe~
+*.dylib
+
+*.test
+
+*.out
+
+go.work
+go.work.sum
+
+.env
