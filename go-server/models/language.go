@@ -10,7 +10,7 @@ type Language struct {
 }
 
 func GetAllLanguages() (*[]Language, error) {
-	query := "SELECT * FROM languages"
+	query := "SELECT * FROM languages;"
 	rows, err := db.DB.Query(query)
 	if err != nil {
 		return nil, err
@@ -31,7 +31,7 @@ func GetAllLanguages() (*[]Language, error) {
 }
 
 func GetLanguageByID(id int64) (*Language, error) {
-	query := "SELECT name FROM languages WHERE language_id = ?"
+	query := "SELECT name FROM languages WHERE language_id = $1"
 	row := db.DB.QueryRow(query, id)
 
 	var language Language
