@@ -1,0 +1,6 @@
+POST http://localhost:5000/api/v2/languages
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mjg5OTc0NDIsInVzZXJJZCI6MSwidXNlcm5hbWUiOiJnZXJhcmQifQ.tha1XG4oVmEbskoTPicnkwWVTHNZqCSXGdXas3zB64Y
+
+{
+    "name": "Yeetish"
+}

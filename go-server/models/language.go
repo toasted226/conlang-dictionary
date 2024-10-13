@@ -5,8 +5,8 @@ import (
 )
 
 type Language struct {
-	ID   int64
-	Name string `binding:"required"`
+	ID   int64  `json:"language_id"`
+	Name string `binding:"required" json:"name"`
 }
 
 func GetAllLanguages() (*[]Language, error) {
@@ -42,4 +42,20 @@ func GetLanguageByID(id int64) (*Language, error) {
 	}
 
 	return &language, nil
+}
+
+func (l *Language) Save() error {
+	query := "INSERT INTO languages (name) VALUES ($1)"
+	stmt, err := db.DB.Prepare(query)
+	if err != nil {
+		return err
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(l.Name)
+	if err != nil {
+		return nil
+	}
+
+	return nil
 }

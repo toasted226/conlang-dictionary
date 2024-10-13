@@ -4,7 +4,7 @@ import { provideRouter, withComponentInputBinding } from "@angular/router";
 import { routes } from "./app.routes";
 import { provideHttpClient } from "@angular/common/http";
 
-export const apiEndpoint = "http://localhost:5000/api/v1";
+export const apiEndpoint = "http://localhost:5000/api/v2";
 
 export const appConfig: ApplicationConfig = {
     providers: [

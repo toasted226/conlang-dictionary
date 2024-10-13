@@ -8,9 +8,9 @@ import (
 )
 
 type User struct {
-	ID       int64
-	Username string `binding:"required"`
-	Password string `binding:"required"`
+	ID       int64  `json:"user_id"`
+	Username string `binding:"required" json:"username"`
+	Password string `binding:"required" json:"password"`
 }
 
 func GetUsername(userId int64) (string, error) {

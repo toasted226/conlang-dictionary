@@ -6,14 +6,17 @@ import (
 )
 
 func RegisterRoutes(server *gin.Engine) {
-	mainGroup := server.Group("/api/v2")
-	mainGroup.GET("/languages", getLanguages)
-	mainGroup.GET("/languages/:id", getLanguage)
+	// user routes
+	server.POST("/api/v2/users/login", login)
+	server.POST("/api/v2/users/create", createAccount)
+	//language routes
+	server.GET("/api/v2/languages", getLanguages)
+	server.GET("/api/v2/languages/:id", getLanguage)
 
-	mainGroup.POST("/login", login)
-	mainGroup.POST("/create", createAccount)
-
-	authGroup := server.Group("/api/v2")
-	authGroup.Use(middleware.Authenticate)
-	authGroup.GET("/login", authenticated)
+	// user routes
+	server.GET("/api/v2/users/login", middleware.Authenticate, authenticated)
+	// language routes
+	server.POST("/api/v2/languages", middleware.Authenticate, addLanguage)
+	server.PATCH("/api/v2/languages/:id", middleware.Authenticate, updateLanguage)
+	server.DELETE("/api/v2/languages/:id", middleware.Authenticate, deleteLanguage)
 }

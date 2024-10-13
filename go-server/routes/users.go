@@ -31,15 +31,25 @@ func login(context *gin.Context) {
 		return
 	}
 
-	context.SetCookie(
-		"token",
-		token,
-		60*60*24*2,
-		"/",
-		"localhost",
-		false,
-		true,
-	)
+	// context.SetCookie(
+	// 	"token",
+	// 	token,
+	// 	60*60*24*2,
+	// 	"/",
+	// 	"localhost",
+	// 	false,
+	// 	true,
+	// )
+	cookie := &http.Cookie{
+		Name:     "token",
+		Value:    token,
+		Domain:   "localhost",
+		Path:     "/",
+		HttpOnly: true,
+		Secure:   false,
+		SameSite: http.SameSiteLaxMode,
+	}
+	http.SetCookie(context.Writer, cookie)
 
 	context.JSON(http.StatusOK, gin.H{"message": "Logged in successfully!"})
 }
