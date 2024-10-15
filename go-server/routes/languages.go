@@ -56,9 +56,47 @@ func addLanguage(context *gin.Context) {
 }
 
 func updateLanguage(context *gin.Context) {
+	id, err := strconv.ParseInt(context.Param("id"), 10, 64)
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse request data.", "error": err})
+		return
+	}
 
+	var updatedLanguage models.Language
+	err = context.ShouldBindJSON(&updatedLanguage)
+
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse request data.", "error": err})
+		return
+	}
+
+	updatedLanguage.ID = id
+	err = updatedLanguage.Update()
+
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": "Could not update language. Try again later.", "error": err})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"message": "Language updated successfully!"})
 }
 
 func deleteLanguage(context *gin.Context) {
+	id, err := strconv.ParseInt(context.Param("id"), 10, 64)
 
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse request data.", "error": err})
+		return
+	}
+
+	var language models.Language
+	language.ID = id
+	err = language.Delete()
+
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": "Could not delete language.", "error": err})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"message": "Successfully deleted language!"})
 }

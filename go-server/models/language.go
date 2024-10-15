@@ -53,9 +53,29 @@ func (l *Language) Save() error {
 	defer stmt.Close()
 
 	_, err = stmt.Exec(l.Name)
-	if err != nil {
-		return nil
-	}
+	return err
+}
 
-	return nil
+func (l *Language) Update() error {
+	query := "UPDATE languages SET name = $1 WHERE language_id = $2"
+	stmt, err := db.DB.Prepare(query)
+	if err != nil {
+		return err
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(l.Name, l.ID)
+	return err
+}
+
+func (l *Language) Delete() error {
+	query := "DELETE FROM languages WHERE language_id = $1"
+	stmt, err := db.DB.Prepare(query)
+	if err != nil {
+		return err
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(l.ID)
+	return err
 }

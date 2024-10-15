@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -17,11 +16,9 @@ func Authenticate(context *gin.Context) {
 	// token := context.Request.Header.Get("Authorization")
 	token, err := context.Cookie("token")
 	if err != nil {
-		fmt.Println("Failed to get cookie")
 		context.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"authenticated": false})
 		return
 	}
-	fmt.Println("Here's the token: ", token)
 
 	if token == "" {
 		context.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"authenticated": false})
