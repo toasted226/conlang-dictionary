@@ -69,4 +69,28 @@ func createTables() {
 		fmt.Println(err)
 		panic("Failed to create users table!")
 	}
+
+	createWordsTable := `
+	CREATE TABLE IF NOT EXISTS users (
+		word_id SERIAL PRIMARY KEY,
+		language_id INTEGER NOT NULL,
+		word VARCHAR(50) NOT NULL,
+		translation VARCHAR(50) NOT NULL,
+		part_of_speech VARCHAR(50) NOT NULL,
+		example VARCHAR(200),
+		example_translation VARCHAR(200),
+		phonetic_transcription VARCHAR(50),
+		FOREIGN KEY(language_id) REFERENCES languages(language_id)
+	)
+	`
+	stmt, err = DB.Prepare(createWordsTable)
+	if err != nil {
+		fmt.Println(err)
+		panic("Failed to create words table!")
+	}
+	_, err = stmt.Exec()
+	if err != nil {
+		fmt.Println(err)
+		panic("Failed to create words table!")
+	}
 }
