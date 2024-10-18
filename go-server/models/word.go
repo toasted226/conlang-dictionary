@@ -39,3 +39,42 @@ func (w *Word) Save(languageId int64) (int64, error) {
 	id, err := res.LastInsertId()
 	return id, err
 }
+
+func (w *Word) GetAllWords(languageId int64, search string) (*[]Word, error) {
+	query := "SELECT * FROM words WHERE language_id = $1 "
+	ordering := "ORDER BY word ASC"
+	args := []any{languageId}
+
+	if search != "" {
+		search += "%"
+		exampleSearch := "%" + search
+		query += "AND LOWER(word) LIKE $2 OR language_id = $1 AND LOWER(example) LIKE $3"
+		args = append(args, search)
+		args = append(args, exampleSearch)
+	}
+
+	query += ordering
+
+	stmt, err := db.DB.Prepare(query)
+	if err != nil {
+		return nil, err
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Query(args...)
+	if err != nil {
+		return nil, err
+	}
+
+	words := make([]Word, 0)
+	for rows.Next() {
+		var w Word
+		err = rows.Scan(&w.ID, &w.LanguageID, &w.Word, &w.Translation, &w.PartOfSpeech, &w.Example, &w.ExampleTranslation, &w.PhoneticTranscription)
+		if err != nil {
+			return nil, err
+		}
+		words = append(words, w)
+	}
+
+	return &words, nil
+}
