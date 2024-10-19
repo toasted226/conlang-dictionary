@@ -1,6 +1,8 @@
 package models
 
-import "ouenjs.com/go-server/db"
+import (
+	"ouenjs.com/go-server/db"
+)
 
 type Word struct {
 	ID                    int64  `json:"word_id"`
@@ -40,7 +42,7 @@ func (w *Word) Save(languageId int64) (int64, error) {
 	return id, err
 }
 
-func (w *Word) GetAllWords(languageId int64, search string) (*[]Word, error) {
+func GetAllWords(languageId int64, search string) (*[]Word, error) {
 	query := "SELECT * FROM words WHERE language_id = $1 "
 	ordering := "ORDER BY word ASC"
 	args := []any{languageId}
@@ -48,7 +50,7 @@ func (w *Word) GetAllWords(languageId int64, search string) (*[]Word, error) {
 	if search != "" {
 		search += "%"
 		exampleSearch := "%" + search
-		query += "AND LOWER(word) LIKE $2 OR language_id = $1 AND LOWER(example) LIKE $3"
+		query += "AND LOWER(word) LIKE $2 OR language_id = $1 AND LOWER(example) LIKE $3 "
 		args = append(args, search)
 		args = append(args, exampleSearch)
 	}

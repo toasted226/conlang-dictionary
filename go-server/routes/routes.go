@@ -13,7 +13,7 @@ func RegisterRoutes(server *gin.Engine) {
 	server.GET("/api/v2/languages", getLanguages)
 	server.GET("/api/v2/languages/:id", getLanguage)
 	// word routes
-	server.GET("/api/v2/words", getWords)
+	server.GET("/api/v2/words/:id", getWords)
 
 	// user routes
 	server.GET("/api/v2/users/login", middleware.Authenticate, authenticated)
