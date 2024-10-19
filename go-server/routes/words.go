@@ -30,13 +30,15 @@ func getWords(c *gin.Context) {
 func addWord(c *gin.Context) {
 	language, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	if err != nil {
+		fmt.Println(err)
 		c.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse request data.", "error": err})
 		return
 	}
 
 	var word models.Word
-	err = c.ShouldBindJSON(word)
+	err = c.ShouldBindJSON(&word)
 	if err != nil {
+		fmt.Println(err)
 		c.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse request data", "error": err})
 		return
 	}

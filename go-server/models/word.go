@@ -1,6 +1,9 @@
 package models
 
 import (
+	"errors"
+	"fmt"
+
 	"ouenjs.com/go-server/db"
 )
 
@@ -88,13 +91,15 @@ func GetAllWords(languageId int64, search string) (*[]Word, error) {
 
 	stmt, err := db.DB.Prepare(query)
 	if err != nil {
-		return nil, err
+		fmt.Println(err)
+		return nil, errors.New(err.Error())
 	}
 	defer stmt.Close()
 
 	rows, err := stmt.Query(args...)
 	if err != nil {
-		return nil, err
+		fmt.Println(err)
+		return nil, errors.New(err.Error())
 	}
 
 	words := make([]Word, 0)
@@ -102,7 +107,8 @@ func GetAllWords(languageId int64, search string) (*[]Word, error) {
 		var w Word
 		err = rows.Scan(&w.ID, &w.LanguageID, &w.Word, &w.Translation, &w.PartOfSpeech, &w.Example, &w.ExampleTranslation, &w.PhoneticTranscription)
 		if err != nil {
-			return nil, err
+			fmt.Println(err)
+			return nil, errors.New(err.Error())
 		}
 		words = append(words, w)
 	}
