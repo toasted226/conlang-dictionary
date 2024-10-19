@@ -21,4 +21,8 @@ func RegisterRoutes(server *gin.Engine) {
 	server.POST("/api/v2/languages", middleware.Authenticate, addLanguage)
 	server.PUT("/api/v2/languages/:id", middleware.Authenticate, updateLanguage)
 	server.DELETE("/api/v2/languages/:id", middleware.Authenticate, deleteLanguage)
+	// word routes
+	server.POST("/api/v2/words/:id", middleware.Authenticate, addWord)
+	server.PUT("/api/v2/words/:id/:word", middleware.Authenticate, updateWord)
+	server.DELETE("/api/v2/words/:id/:word", middleware.Authenticate, deleteWord)
 }

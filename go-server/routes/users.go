@@ -8,30 +8,30 @@ import (
 	"ouenjs.com/go-server/utils"
 )
 
-func login(context *gin.Context) {
+func login(c *gin.Context) {
 	var user models.User
-	err := context.ShouldBindJSON(&user)
+	err := c.ShouldBindJSON(&user)
 
 	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse request data.", "error": err})
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse request data.", "error": err})
 		return
 	}
 
 	err = user.ValidateCredentials()
 
 	if err != nil {
-		context.JSON(http.StatusUnauthorized, gin.H{"message": "Invalid credentials", "error": err})
+		c.JSON(http.StatusUnauthorized, gin.H{"message": "Invalid credentials", "error": err})
 		return
 	}
 
 	token, err := utils.GenerateToken(user.Username, user.ID)
 
 	if err != nil {
-		context.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to generate token", "error": err})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to generate token", "error": err})
 		return
 	}
 
-	// context.SetCookie(
+	// c.SetCookie(
 	// 	"token",
 	// 	token,
 	// 	60*60*24*2,
@@ -49,38 +49,38 @@ func login(context *gin.Context) {
 		Secure:   false,
 		SameSite: http.SameSiteLaxMode,
 	}
-	http.SetCookie(context.Writer, cookie)
+	http.SetCookie(c.Writer, cookie)
 
-	context.JSON(http.StatusOK, gin.H{"message": "Logged in successfully!"})
+	c.JSON(http.StatusOK, gin.H{"message": "Logged in successfully!"})
 }
 
-func createAccount(context *gin.Context) {
+func createAccount(c *gin.Context) {
 	var user models.User
-	err := context.ShouldBindJSON(&user)
+	err := c.ShouldBindJSON(&user)
 
 	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse request data.", "error": err})
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse request data.", "error": err})
 		return
 	}
 
 	err = user.Save()
 
 	if err != nil {
-		context.JSON(http.StatusUnauthorized, gin.H{"message": "Could not create account. Try again later.", "error": err})
+		c.JSON(http.StatusUnauthorized, gin.H{"message": "Could not create account. Try again later.", "error": err})
 		return
 	}
 
-	context.JSON(http.StatusCreated, gin.H{"message": "Successfully created account!"})
+	c.JSON(http.StatusCreated, gin.H{"message": "Successfully created account!"})
 }
 
-func authenticated(context *gin.Context) {
-	userId := context.GetInt64("userId")
+func authenticated(c *gin.Context) {
+	userId := c.GetInt64("userId")
 	username, err := models.GetUsername(userId)
 
 	if err != nil {
-		context.JSON(http.StatusInternalServerError, gin.H{"message": "Could not get username. Try again later.", "username": username})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Could not get username. Try again later.", "username": username})
 		return
 	}
 
-	context.JSON(http.StatusOK, gin.H{"username": username})
+	c.JSON(http.StatusOK, gin.H{"username": username})
 }

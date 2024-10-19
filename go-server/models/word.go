@@ -15,7 +15,7 @@ type Word struct {
 	PhoneticTranscription string `json:"phonetic_transcription"`
 }
 
-func (w *Word) Save(languageId int64) (int64, error) {
+func (w *Word) Save() error {
 	query := `
 	INSERT INTO words (
 		language_id, 
@@ -29,17 +29,46 @@ func (w *Word) Save(languageId int64) (int64, error) {
 	`
 	stmt, err := db.DB.Prepare(query)
 	if err != nil {
-		return 0, err
+		return err
 	}
 	defer stmt.Close()
 
-	res, err := stmt.Exec(languageId, w.Word, w.Translation, w.PartOfSpeech, w.Example, w.ExampleTranslation, w.PhoneticTranscription)
-	if err != nil {
-		return 0, err
-	}
+	_, err = stmt.Exec(w.LanguageID, w.Word, w.Translation, w.PartOfSpeech, w.Example, w.ExampleTranslation, w.PhoneticTranscription)
+	return err
+}
 
-	id, err := res.LastInsertId()
-	return id, err
+func (w *Word) Delete() error {
+	query := "DELETE FROM words WHERE word_id = $1 AND language_id = $2"
+	stmt, err := db.DB.Prepare(query)
+	if err != nil {
+		return err
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(w.ID, w.LanguageID)
+	return err
+}
+
+func (w *Word) Update() error {
+	query := `
+	UPDATE words
+	SET
+	word = $1,
+	translation = $2,
+	part_of_speech = $3,
+	example = $4,
+	example_translation = $5,
+	phonetic_transcription = $6
+	WHERE word_id = $7 AND language_id = $8
+	`
+	stmt, err := db.DB.Prepare(query)
+	if err != nil {
+		return err
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(w.Word, w.Translation, w.PartOfSpeech, w.Example, w.ExampleTranslation, w.PhoneticTranscription, w.ID, w.LanguageID)
+	return err
 }
 
 func GetAllWords(languageId int64, search string) (*[]Word, error) {
