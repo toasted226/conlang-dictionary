@@ -2,6 +2,7 @@ package routes
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"ouenjs.com/go-server/models"
@@ -83,4 +84,18 @@ func authenticated(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"username": username})
+}
+
+func logout(c *gin.Context) {
+	token := &http.Cookie{
+		Name:     "token",
+		Value:    "",
+		Path:     "/",
+		Expires:  time.Unix(0, 0),
+		HttpOnly: true,
+	}
+
+	http.SetCookie(c.Writer, token)
+
+	c.JSON(http.StatusOK, gin.H{"message": "Logged out successfully!"})
 }

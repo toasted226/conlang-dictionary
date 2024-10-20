@@ -44,7 +44,6 @@ func addWord(c *gin.Context) {
 	}
 
 	word.LanguageID = language
-	fmt.Println(word)
 	err = word.Save()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Could not add word. Try again later.", "error": err})
