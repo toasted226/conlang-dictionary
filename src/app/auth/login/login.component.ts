@@ -41,8 +41,8 @@ export class LoginComponent {
 					this.router.navigateByUrl(this.router.parseUrl(""));
 				},
 				error: (err: Error) => {
-					console.log(err.message);
-					this.errorMessage.set(err.message);
+					console.log(err);
+					this.errorMessage.set("Invalid credentials");
 					setTimeout(() => this.errorMessage.set(""), 5000);
 				}
 			});
